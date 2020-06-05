@@ -10,10 +10,11 @@
 		        <img src="https://img.shields.io/discord/598415377478844442?color=blue&label=discord&style=plastic" alt="discord">
 		</a>
 	<br><br>
-	Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software<br>
-	Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
 	</div>
 </div>
+
+- Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software<br>
+- Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
 
 <div align="center">
 	<h2>How to setup?</h2>
