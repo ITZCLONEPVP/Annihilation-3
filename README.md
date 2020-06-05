@@ -1,5 +1,6 @@
 <div align="center">
 	<h2>Annihilation</h2>
+	Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software
 </div>
 <div align=center>
 	<a href="https://github.com/NTT1906/Annihilation">
@@ -15,7 +16,6 @@
 	<br><br>
 	</div>
 </div>
-- Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software
 <div align="center">
 	<h2>What is annihilation minigame?</h2>
 </div>
