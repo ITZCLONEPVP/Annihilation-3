@@ -1,8 +1,10 @@
-![Picture](https://i.ibb.co/7nTV8vx/1591333964460.png)
 <div align="center">
-	<h1>Annihilation</h1>
+	<h2>Annihilation</h2>
 </div>
 <div align=center>
+	<a href="https://github.com/NTT1906/Annihilation">
+		<img src="https://i.ibb.co/7nTV8vx/1591333964460.png">
+	</a>
 	<div align=left>
 		<a href="https://discord.gg/emSrPFn">
 		        <img src="https://img.shields.io/discord/598415377478844442?color=blue&label=discord&style=plastic" alt="discord">
@@ -14,9 +16,13 @@
 	</div>
 </div>
 Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software
-## What is annihilation minigame?
+<div align="center">
+	<h2>What is annihilation minigame?</h2>
+</div>
 Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
-## Dependant plugin?
+<div align="center">
+	<h2>Dependant plugin?</h2>
+</div>
 Yes, this plugin is depended on some plugins and files but you don't need to worry, our plugin can handle this without your help
 | Name | Link |
 | --- | --- |
