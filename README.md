@@ -15,15 +15,15 @@
 	<br><br>
 	</div>
 </div>
-Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software
+- Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software
 <div align="center">
 	<h2>What is annihilation minigame?</h2>
 </div>
-Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
+- Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
 <div align="center">
 	<h2>Dependant plugin?</h2>
 </div>
-Yes, this plugin is depended on some plugins and files but you don't need to worry, our plugin can handle this without your help
+- Yes, this plugin is depended on some plugins and files but you don't need to worry, our plugin can handle this without your help
 | Name | Link |
 | --- | --- |
 | **Yaml Library** | **[Library](https://github.com/NTT1906/Library)** |
@@ -42,7 +42,7 @@ Yes, this plugin is depended on some plugins and files but you don't need to wor
  
  -  <h3>Setup the plugin data:</h3>
 1. Edit by modify data.yml in /annihilations/data.yml
-2. Or using command `/ah setup help`
+2. Or using command `/ah setup help` <br><br>
 Note: If you don't setup the level, some features will disable this plugin
 
 -  <h3>Create and setup an arena:</h3>
