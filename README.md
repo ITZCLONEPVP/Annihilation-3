@@ -1,7 +1,7 @@
+![Picture](https://i.ibb.co/7nTV8vx/1591333964460.png)
 <div align="center">
 	<h1>Annihilation</h1>
 </div>
-![Picture](https://i.ibb.co/7nTV8vx/1591333964460.png)
 <div align=center>
 	<div align=left>
 		<a href="https://discord.gg/emSrPFn">
