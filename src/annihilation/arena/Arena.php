@@ -120,6 +120,10 @@ class RandomArenaChooser {
 		$player->sendMessage(""); // <string> Quiting the game		
 	}
 	
+	public function createData() {
+		
+	}
+	
 	public function checkData() {
 		// ....
 	}
@@ -129,9 +133,10 @@ class RandomArenaChooser {
 		$this->data = 
 		[
 			'name_arena' => null,
-			'status' => 0,		
+			'status' => 0,	
+			'teams' => [],
 			'min_players' => 2,
-			'max_players' => 8,
+			'max_per_teams' => 4,
 			'level' => null
 		];
 	}
