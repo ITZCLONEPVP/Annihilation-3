@@ -86,6 +86,11 @@ class RandomArenaChooser {
 		//return array_map(array(self, "getPlayer"), $this->players...
 	}
 	
-	public function isOnline(){
+	public function inGame($player) : bool{
+		if(!$player instanceof Player) $player = $this->getPlayer($player);
+		if($player->getLevel()->getName() != $this->data->level){
+			if(isset($this->players[$player->getName()])) return true;
+		}
+		return false;
 	}
 }

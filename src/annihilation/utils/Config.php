@@ -57,7 +57,7 @@ class Config{
 	public const SERIALIZED = 4; // .sl
 	public const ENUM = 5; // .txt, .list, .enum
 	public const ENUMERATION = Config::ENUM;
-	public const MCLANG = 6 // .lang
+	public const MCANG = 6; //.lang
 
 	/**
 	 * @var mixed[]

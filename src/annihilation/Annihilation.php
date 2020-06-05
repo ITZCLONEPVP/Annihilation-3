@@ -138,7 +138,7 @@ class Annihilation{
 	
 	public function setUp(){
 		if(!file_exists($this->setPluginPath())) @mkdir($this->plugin_path, 0777);
-		$language = $this->getUtils()->yml2Array(//Todo);
+//		$language = $this->getUtils()->yml2Array(//Todo);
 		$this->language = new LangManager($this, self::GAME_LANG);
 		$this->lang_path = $this->getPluginPath() . "lang/";
 		$this->utils = new Utils($this);

@@ -30,7 +30,7 @@ class RandomArenaChooser {
  	* @return Arena $arena
 	 */
 	public function getRandomArena() : ?Arena{
-		$arenas = $this->plugin->getArenas()
+		$arenas = $this->plugin->getArenas();
 		$arenasByPlayers = [];
 		foreach($arenas as $index => $arena){
 			if($arena->scheduler->phase == 0 || $arena->scheduler->startTime >= 6){
