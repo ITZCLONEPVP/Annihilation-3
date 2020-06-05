@@ -1,6 +1,5 @@
 <div align="center">
 	<h2>Annihilation</h2>
-	Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software
 </div>
 <div align=center>
 	<a href="https://github.com/NTT1906/Annihilation">
@@ -10,26 +9,11 @@
 		<a href="https://discord.gg/emSrPFn">
 		        <img src="https://img.shields.io/discord/598415377478844442?color=blue&label=discord&style=plastic" alt="discord">
 		</a>
-		<a href="https://discord.gg/emSrPFn">
-		        <img src="https://img.shields.io/discord/598415377478844442?color=blue&label=discord&style=plastic" alt="discord">
-		</a>
 	<br><br>
+	Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software<br>
+	Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
 	</div>
 </div>
-<div align="center">
-	<h2>What is annihilation minigame?</h2>
-</div>
-- Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
-<div align="center">
-	<h2>Dependant plugin?</h2>
-</div>
-- Yes, this plugin is depended on some plugins and files but you don't need to worry, our plugin can handle this without your help
-| Name | Link |
-| --- | --- |
-| **Yaml Library** | **[Library](https://github.com/NTT1906/Library)** |
-| **Scoreboards.php** | **[Library](https://github.com/NTT1906/Library)** |
-| **FormAPI (Edited)** | **[Library](https://github.com/NTT1906/Library)** |
-| **EconomyAPI (Default)** | **[EconomyS](https://github.com/poggit-orphanage/EconomyS)** |
 
 <div align="center">
 	<h2>How to setup?</h2>
@@ -63,7 +47,15 @@ Note: If you don't setup the level, some features will disable this plugin
 | **/ah list** | **Displays list of arenas**<br><br>![](https://i.ibb.co/QPPsz37/obrazek.png) |
 | **/ah remove** | **Removes an arena**<br><br>- Requires an id from /ah list |
 | **/ah start** | **Force start game** |
+
 <div align="center">
-	<h2>Donation?</h2>
+	<h2>Dependant plugin?</h2>
 </div>
+
+- [Scoreboards, FormAPI, Yaml](https://github.com/NTT1906/Library).
+- [EconomyAPI](https://github.com/poggit-orphanage/EconomyS).
+<div align="center">
+	<h2>Donation</h2>
+</div>
+
 - If you want to donate money to us then contact [MFDGaming](https://github.com/MFDGaming), he deserves the money.
