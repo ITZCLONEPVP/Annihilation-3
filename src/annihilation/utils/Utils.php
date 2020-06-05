@@ -61,4 +61,21 @@ class Utils{
 	
 	public function translateValue(){
 	}
+	
+	public function dec2RGB($decStr, $returnAsString = false, $seperator = ',') {
+		# Normalize a proper hex string with length 6
+		$hexStr = preg_replace("/[^0123456789abcdef]/", '',strtolower(dechex($decStr)));
+		if(strlen($hexStr) == 3) $hexStr = preg_replace("/(.)(.)(.)/", '\1\1\2\2\3\3', $hexStr);
+		#converHex2RGB
+		if(preg_match('/^[0123456789abcdef]{6}$/',$hexStr)){
+			$rgbResult=array();
+			#2 characters will correspond to each color
+			foreach(array('red','green','blue') as $str_pos=>$color_index){
+				$rgbResult[$color_index]=hexdec(substr($hexStr,2*$str_pos,2));
+				#return array o string depending on second paramenter
+				return $returnAsString ? implode($seperator, $rgbResult) : $rgbResult;
+			}
+		}
+		return false; //Invalid hex color code
+	}
 }

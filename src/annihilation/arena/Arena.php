@@ -41,24 +41,69 @@ use annihilation\event\ArenaRestartEvent;
 use annihilation\math\Time;
 
 class RandomArenaChooser {
-    /** @var Annihilation $plugin */
-    public $plugin;	
+	/** Arena Phase Id */
+	const PHASE_WAIT = 0;
+	const PHASE_GAME_1 = 1;
+	const PHASE_GAME_2 = 2;
+	const PHASE_GAME_3 = 3;
+	const PHASE_GAME_4 = 4;
+	const PHASE_GAME_5 = 5;
+	const PHASE_RESTART = 6;
+	/** Point id */
+	const KILL_POINT = 0;
+	const WIN_POINT = 1;
+	const JOIN_POINT = 2;
+	const DEATH_POINT = 3;
+	/** Team colour ids*/
+	private const TEAM_BASE_DATA = [
+		"Red" => [
+			"name" => "Red",
+			"color" => "§c",
+			"sub-color" => "§4",
+			"armor-colour-decimal" => "11141120",
+		],
+		"Blue" => [
+			"name" => "Blue",
+			"color" => "§9",
+			"sub-color" => "§1",
+			"armor-colour-decimal" => "170",
+		],
+		"Green" => [
+			"name" => "Green",
+			"color" => "§a",
+			"sub-color" => "§2",
+			"armor-colour-decimal" => "5635925",
+		],
+		"Yellow" => [
+			"name" => "Yellow",
+			"color" => "§e",
+			"sub-color" => "§6",
+			"armor-colour-decimal" => "16777045",
+		],
+	];
+	/** @var Annihilation $plugin */
+	public $plugin;
+	
     /** @var ArenaScheduler $scheduler */
     public $scheduler;
-    /** @var \annihilation\lib\formapi\FormAPI $formapi */
-    public $formapi;
-    /** @var \annihilation\lib\scordboard\Scoreboard $scoreboard */
-    public $scoreboard;
-    /** @var \annihilation\utils\Utils $utils */
-    public $utils;
+	/** @var \annihilation\lib\formapi\FormAPI $formapi */
+	public $formapi;
+	/** @var \annihilation\lib\scordboard\Scoreboard $scoreboard */
+	public $scoreboard;
+   /** @var \annihilation\utils\Utils $utils */
+    public $utils = null;
     /** @var LangManager $lang */
-    public $lang;   
-    /** @var array $players **/
-    private $players = [];	
-    /** @var CONST */
-    public const WAITING = 0, READY = 1, PLAYING = 2, RESTARTING = 3;    
-    /** @var array $data */
-    private $data = array();
+    public $lang;
+    /** @var array[] $player */
+    public $players = array(); 
+    /** @var array[] $data */
+    public $data = array();    
+    /** @var array[] $kits */
+    public $kits = array();
+    /** @var array[] $phase */
+    public $phase = 0;
+    /** @var array[] $points */
+    public $points = array();
 	/**
  	* Arena constructor.
  	* @param Annihilation $plugin
@@ -86,59 +131,41 @@ class RandomArenaChooser {
 		//return array_map(array(self, "getPlayer"), $this->players...
 	}
 	
-	/** This is function to get status for one arena  ??? XD **/
-	public function getStatus() { $status = $this->data['status']; return $status; }
-	
 	public function inGame($player) : bool{
-		if(!$player instanceof Player) $player = $this->getPlayer($player);
+		if(!$player instanceof Player){
+			$player = $this->getPlayer($player)
+			if($player != null) $player = $this->getPlayer($player);
+			return false;
+		}
 		if($player->getLevel()->getName() != $this->data->level){
 			if(isset($this->players[$player->getName()])) return true;
 		}
 		return false;
 	}
 	
-	// Function join the game @var Player $player
-	public function joinTheGame(Player $player) {
-		if($this->getStatus() == self::PLAYING 
-		or  $this->getStatus() == self::RESTARTING) {
-			$player->sendMessage(""); // <string> playing
+	public function addPoint($player, int $pointType) : bool{
+		if(!$player instanceof Player){
+			$player = $this->getPlayer($player)
+			if($player != null) $player = $this->getPlayer($player);
+			return false;
 		}
-		
-		$this->players[$player->getName()] = $player;
-		$lobby = $this->data['spawn_lobby'];
-		// Something to move it ??
-		$player->sendMessage(""); // <string> Joining the game		
-	}
-	
-	// Function leave the game @var Player $player
-	public function leaveTheGame(Player $player) {
-                if($this->inGame($player) != true) return; // not sure
-		if(isset($this->players[$player->getName()])) {
-			unset($this->players[$player->getName()]);
+		if(!isset($this->points[$player->getName()])) $this->points[$player->getName()]["kill" => 0, "win" => 0, "join" = 0", death" = 0];
+		switch($pointType){
+			case self::KILL_POINT:
+				$this->points[$player->getName()]["kill"]++;
+			break;
+			case self::WIN_POINT:
+				$this->points[$player->getName()]["win"]++;
+			break;
+			case self::JOIN_POINT:
+				$this->points[$player->getName()]["join"]++;
+			break;
+			case self::DEATH_POINT:
+				$this->points[$player->getName()]["death"]++;
+			break;
+			default:
+			break;
 		}
-		// Something to move it ??
-		$player->sendMessage(""); // <string> Quiting the game		
+		return true;
 	}
-	
-	public function createData() {
-		
-	}
-	
-	public function checkData() {
-		// ....
-	}
-	
-	// This is basic data for arena
-	public function getData() {
-		$this->data = 
-		[
-			'name_arena' => null,
-			'status' => 0,	
-			'teams' => [],
-			'min_players' => 2,
-			'max_per_teams' => 4,
-			'level' => null
-		];
-	}
-	
 }
