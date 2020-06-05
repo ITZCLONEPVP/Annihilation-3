@@ -1,7 +1,5 @@
-![Picture](https://i.ibb.co/YLKk9kf/20200605-121411.png)
 # Annihilation
-Annihilation Minigame for Foxel/Pmmp/Steadfast3 Server software
-//Todo Discord, Etc, Stuff xD
+Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software
 ## What is annihilation minigame?
 Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
 ## How to install?
@@ -10,15 +8,12 @@ Just download it from //todo or get it from poggit and install it by add it to t
 Yes, this plugin is depended on some plugins but you don't need to worry, our plugin can handle this without your help
 ## Donation?
 If you want to donate money to us then contact MFDGaming, He deserves the money.
+![Picture](https://i.ibb.co/7nTV8vx/1591333964460.png)
 <div align=center>
 	<a href="https://discord.gg/emSrPFn">
-	        <img src="https://img.shields.io/discord/365202594932719616?color=blue&label=discord?style=plastic&logo=appveyor" alt="discord">
+	        <img src="https://img.shields.io/discord/598415377478844442?logo=FoxBE">
 	</a>
 <br><br>
-✔ Simple setup<br>
-✔ Multi arena support<br>
-✔ Lag-clean<br>
-✔ Map reset<br>
 </div>
 
 <div align="center">
@@ -35,11 +30,11 @@ If you want to donate money to us then contact MFDGaming, He deserves the money.
 2. Then follow setup instructions
 
 <div align="center">
-	<h2>Annihilations commands</h2>
+	<h2>Dragons commands</h2>
 </div>
 
 - All the commands requires operator permissions
-- The command is registered under /annihilations with alias /ah
+- The command is registered under /dragons with alias /ah
 
 | Command | Description |
 | --- | --- |
@@ -48,7 +43,3 @@ If you want to donate money to us then contact MFDGaming, He deserves the money.
 | **/ah list** | **Displays list of arenas**<br><br>![](https://i.ibb.co/QPPsz37/obrazek.png) |
 | **/ah remove** | **Removes an arena**<br><br>- Requires an id from /ah list |
 | **/ah start** | **Force start game** |
-
-<div align="center">
-	<h2>Credits</h2>
-</div>
