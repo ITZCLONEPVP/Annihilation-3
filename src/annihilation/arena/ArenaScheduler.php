@@ -1,5 +1,5 @@
 <?php
 
-class ArenaScheduler {}
+class ArenaScheduler {
 
 }
