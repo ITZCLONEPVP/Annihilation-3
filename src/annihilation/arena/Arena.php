@@ -56,28 +56,28 @@ class RandomArenaChooser {
 	const DEATH_POINT = 3;
 	/** Team colour ids*/
 	private const TEAM_BASE_DATA = [
-		"Red" => [
+		"red" => [
 			"name" => "Red",
-			"color" => "§c",
-			"sub-color" => "§4",
+			"colour" => "§c",
+			"sub-colour" => "§4",
 			"armor-colour-decimal" => "11141120",
 		],
-		"Blue" => [
+		"blue" => [
 			"name" => "Blue",
-			"color" => "§9",
-			"sub-color" => "§1",
+			"colour" => "§9",
+			"sub-colour" => "§1",
 			"armor-colour-decimal" => "170",
 		],
-		"Green" => [
+		"green" => [
 			"name" => "Green",
-			"color" => "§a",
-			"sub-color" => "§2",
+			"colour" => "§a",
+			"sub-colour" => "§2",
 			"armor-colour-decimal" => "5635925",
 		],
-		"Yellow" => [
+		"yellow" => [
 			"name" => "Yellow",
-			"color" => "§e",
-			"sub-color" => "§6",
+			"colour" => "§e",
+			"sub-colour" => "§6",
 			"armor-colour-decimal" => "16777045",
 		],
 	];
@@ -117,6 +117,24 @@ class RandomArenaChooser {
 		$this->utils = $plugin->getUtils();
 	}
 	
+	public function getKit($player) : bool{
+		if(!$player instanceof Player){
+			$player = $this->getPlayer($player);
+			if($player != null) $player = $this->getPlayer($player);
+			return false;
+		}
+		$armor_inv = $player->getArmorInventory();
+		$array_map(array(self, "setLeatherAmrorCoulor"), $this->armor_inv->getContents());
+	}
+	
+	public function setLeatherAmrorCoulor($item, $team) : bool{
+		if(!in_array($item->getId(), [Item::LEATHER_CAP, Item::LEATHER_CHESTPLATE, Item::LEATHER_LEGGINGS, Item::LEATHER_BOOTS]) && !in_array(strtolower($team))) return false;
+		$rgb = $this->utils->dec2Rgb(self::TEAM_BASE_DATA[strtolower($team)]["armor-colour-decimal"]);
+		$colour = new Colour($rgb[0], $rgb[1], $rgb[2]);
+		$item->setCustomColor($colour);
+		return true;
+	}
+		
 	public function getPlayer(string $name){
 		if($player = $this->plugin->getServer()->getPlayer($name) == null) $player = $this->plugin->getServer()->getPlayerExact($name);
 		return $this->inGame($player) ? $player : null;
@@ -133,7 +151,7 @@ class RandomArenaChooser {
 	
 	public function inGame($player) : bool{
 		if(!$player instanceof Player){
-			$player = $this->getPlayer($player)
+			$player = $this->getPlayer($player);
 			if($player != null) $player = $this->getPlayer($player);
 			return false;
 		}
@@ -143,17 +161,13 @@ class RandomArenaChooser {
 		return false;
 	}
 	
-	public function getTeamFPlayer($player) {}
-	
-	public function getStatusPerTeam() {}
-	
 	public function addPoint($player, int $pointType) : bool{
 		if(!$player instanceof Player){
-			$player = $this->getPlayer($player)
+			$player = $this->getPlayer($player);
 			if($player != null) $player = $this->getPlayer($player);
 			return false;
 		}
-		if(!isset($this->points[$player->getName()])) $this->points[$player->getName()]["kill" => 0, "win" => 0, "join" = 0", death" = 0];
+		if(!isset($this->points[$player->getName()])) $this->points[$player->getName()] = ["kill" => 0, "win" => 0, "join" => 0, "death" => 0];
 		switch($pointType){
 			case self::KILL_POINT:
 				$this->points[$player->getName()]["kill"]++;

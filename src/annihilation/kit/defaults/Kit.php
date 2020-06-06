@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace annihilation/kit/defaults;
+namespace annihilation\kit\defaults;
 
 use pocketmine\Player;
 
