@@ -143,6 +143,10 @@ class RandomArenaChooser {
 		return false;
 	}
 	
+	public function getTeamFPlayer($player) {}
+	
+	public function getStatusPerTeam() {}
+	
 	public function addPoint($player, int $pointType) : bool{
 		if(!$player instanceof Player){
 			$player = $this->getPlayer($player)
