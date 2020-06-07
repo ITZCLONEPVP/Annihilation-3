@@ -23,6 +23,9 @@ use pocketmine\event\player\PlayerQuitEvent;
 use annihilation\utils\Utils;
 
 class Annihilation{
+	/** @var Annihilation $instance */
+	private static $instance;
+	
 	/** @var array BASE_LANGUAGE */
 	private const BASE_LANGUAGE = [
 		"config" => "1.0.0",
@@ -39,12 +42,18 @@ class Annihilation{
 	];
 	/** @var array BASE_DATA */
 	private const BASE_DATA=[
+		"
 		"waiting-level" => "",
 		"leaderboard" => [
 			"win-position" => "",
 			"kill-position" => "",
 			"line-format" => "{top}-{player}: {point}",
 		],
+		"depends-plugin" => [
+			"economy" => "EconomyAPI",
+			"form-api" => "FormAPI",
+			"redstone" => "RedstoneCircuit",
+		];
 		"phase" => [
 			"custom" => false,
 			"arena-phase-0" => "Waiting",
@@ -95,8 +104,8 @@ class Annihilation{
 			"join-button-subline" => "{arena-status}",
 		],
 	];
-	/** @var array SYSTEM_LANG */
 	
+	/** @var array SYSTEM_LANG */
 	private const SYSTEM_LANG=[
 		"plugin-enabled-success" => "{plugin} is enabled!",
 		"plugin-disabled-success" => "{plugin} is disabled!",
@@ -129,37 +138,29 @@ class Annihilation{
 	/** @var LanguageManager $language */
 	private $language;
 	
-	public function onEnabled(){
+	/** @var Arena[] $arenas */
+	private $arenas = [];
+	
+	private $depends = [];
+	
+	public function onEnable(){
+		self::$instance = $this;
+		$this->depends = ["RedstoneCircuit", "FormAPI", "EconomyAPI"];
 		$this->setUp();
+		//https://github.com/tedo0627/RedstoneCircuit_PMMP-Plugin/releases/download/1.0.1/RedstoneCircuit_v1.0.1.phar
+		//Redstone stuff
 	}
 	
-	public function getDefaultLanguage(){
-	}
+	// -=-
 	
-	public function setUp(){
-		if(!file_exists($this->setPluginPath())) @mkdir($this->plugin_path, 0777);
-//		$language = $this->getUtils()->yml2Array(//Todo);
-		$this->language = new LangManager($this, self::GAME_LANG);
-		$this->lang_path = $this->getPluginPath() . "lang/";
-		$this->utils = new Utils($this);
+	public static function getInstance(){
+		return self::$instance != null ? self::$instance : $this;
 	}
 	
 	public function getUtils(){
 		return $this->utils !== null ? $this->utils : new Utils($this);
 	}
-		
-	
-	private function setPluginPath(string $path = null){
-		if($path == null){
-			$this->plugin_path = $this->getServer()->getDataPath() . $this->getName() . "/";
-		}else{
-			$this->plugin_path = $path;
-		}
-		return $this->plugin_path;
-	}
-	
-	// -=-
-	
+
 	public function getPluginPath(){
 		return !is_null($this->plugin_path) ? $this->plugin_path : $this->getServer()->getDataFolder() . $this->getName() . "/";
 	}
@@ -172,21 +173,22 @@ class Annihilation{
 		return !is_null($this->kit_path) ? $this->kit_path : $this->getPluginPath() . "kit/";
 	}
 	
-	// -=-
-	
-	public function getLang(){
-		return $this->language !== null ? $this->language : new LangManager(self::GAME_LANG);
-	}
-	
-	// -=-
-	
 	public function getPluginData(){
 		return $this->data !== null ? $this->data : $this->getPluginDataFile();
 	}
 	
 	public function getPluginDataFile(){
-		$result = $this->yml2Array(file_get_contents($this->getPluginPath . "data.yml"));
+		$result = $this->config->yml2Array(file_get_contents($this->getPluginPath . "data.yml"));
 		return !is_null($result) ? $result : self::BASE_DATA;
+	}
+	// -=-
+	private function setPluginPath(string $path = null){
+		if($path == null){
+			$this->plugin_path = $this->getServer()->getDataPath() . $this->getName() . "/";
+		}else{
+			$this->plugin_path = $path;
+		}
+		return $this->plugin_path;
 	}
 	
 	public function savePluginData(){
@@ -197,10 +199,18 @@ class Annihilation{
 		$this->getAreans();
 	}
 	
-	// -=-
-	
 	public function getArenas(){
 		
+	}
+	
+	
+	
+	public function setUp(){
+		if(!file_exists($this->setPluginPath())) @mkdir($this->plugin_path, 0777);
+//		$language = $this->getUtils()->yml2Array(//Todo);
+		$this->language = new LangManager($this, self::GAME_LANG);
+		$this->lang_path = $this->getPluginPath() . "lang/";
+		$this->utils = new Utils($this);
 	}
 	
 	// -=-
@@ -216,9 +226,7 @@ class Annihilation{
 		}
 	}
 	
-	// -=-
-	
-	public function onDisabled(){
+	public function onDisable(){
 		$this->savePluginData();
 		$this->saveGameData();
 	}

@@ -2,11 +2,14 @@ name: Annihilation
 main: annihilation\Annihilation
 api: [3.10.0, 3.12.0]
 version: 1.0.0
+description: Annihilation minigame plugin
 author: NTT
 authors:
  -NTT
  -MFDGaming
+ -DragoVN
 website: https://github.com/NTT1906/Annihilation
-partner: https://github.com/MFDGaming
+partners: 
+ -https://github.com/MFDGaming
 description: A minigame plugin for Foxel/Pmmp/Steadfast3 Server Software
 permissions:

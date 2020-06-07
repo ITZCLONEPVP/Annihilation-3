@@ -28,7 +28,7 @@
  -  <h3>Setup the plugin data:</h3>
 1. Edit by modify data.yml in /annihilations/data.yml
 2. Or using command `/ah setup help` <br><br>
-Note: If you don't setup the level, some features will disable this plugin
+Note: If you don't do this, this plugin will be disabled
 
  -  <h3>Create and setup an arena:</h3>
 1. Create an arena using `/ah create`
