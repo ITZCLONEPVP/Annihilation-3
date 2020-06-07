@@ -170,7 +170,7 @@ class RandomArenaChooser {
 		$points = $this->points[$player->getName()];
 		if(!isset($this->points[$player->getName()])) $this->points[$player->getName()] = ["kill" => 0, "win" => 0, "join" => 0, "death" => 0];
 		switch($pointType){
-			case self::KILL_POINT: ["kill"]++; break;
+			case self::KILL_POINT: $points["kill"]++; break;
 			case self::WIN_POINT: $points["win"]++; break; // This is for config ???
 			case self::JOIN_POINT: $points["join"]++; break;
 			case self::DEATH_POINT: $points["death"]++; break;
