@@ -54,6 +54,7 @@ class RandomArenaChooser {
 	const WIN_POINT = 1;
 	const JOIN_POINT = 2;
 	const DEATH_POINT = 3;
+	/** Basic data for players */
 	private const BASIC_DATA_PLAYER = ["kill" => 0, "win" => 0, "join" => 0, "death" => 0];
 	/** Team colour ids*/
 	private const TEAM_BASE_DATA = [
@@ -130,8 +131,14 @@ class RandomArenaChooser {
 		$array_map(array(self, "setLeatherAmrorCoulor"), $this->armor_inv->getContents());
 	}
 	
-	public function setLeatherAmrorCoulor($item, $team) : bool{
-		if(!in_array($item->getId(), [Item::LEATHER_CAP, Item::LEATHER_CHESTPLATE, Item::LEATHER_LEGGINGS, Item::LEATHER_BOOTS]) && !in_array(strtolower($team))) return false;
+	public function setLeatherAmrorCoulor($item, $team) : bool{		
+		$armors = [
+			Item::LEATHER_CAP,
+			Item::LEATHER_CHESTPLATE,
+			Item::LEATHER_LEGGINGS,
+			Item::LEATHER_BOOTS
+		];		
+		if(!in_array($item->getId(), $armors) && !in_array(strtolower($team))) return false;
 		$rgb = $this->utils->dec2Rgb(self::TEAM_BASE_DATA[strtolower($team)]["armor-colour-decimal"]);
 		$colour = new Colour($rgb[0], $rgb[1], $rgb[2]);
 		$item->setCustomColor($colour);
@@ -139,7 +146,8 @@ class RandomArenaChooser {
 	}
 		
 	public function getPlayer(string $name){
-		if($player = $this->gserver->getPlayer($name) == null) $player = $this->gserver->getPlayerExact($name);
+		$player = $this->gserver->getPlayer($name);
+		if($player == null) $player = $this->gserver->getPlayerExact($name);
 		return $this->inGame($player) ? $player : null;
 	}
 	
