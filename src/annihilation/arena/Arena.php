@@ -54,6 +54,7 @@ class RandomArenaChooser {
 	const WIN_POINT = 1;
 	const JOIN_POINT = 2;
 	const DEATH_POINT = 3;
+	private const BASIC_DATA_PLAYER = ["kill" => 0, "win" => 0, "join" => 0, "death" => 0];
 	/** Team colour ids*/
 	private const TEAM_BASE_DATA = [
 		"red" => [
@@ -81,15 +82,16 @@ class RandomArenaChooser {
 			"armor-colour-decimal" => "16777045",
 		],
 	];
-	/** @var Annihilation $plugin */
-	public $plugin;
-	
+    /** @var Annihilation $plugin */
+    public $plugin; 
+    /** @var Annihilation $gserver */
+    public $gserver;
     /** @var ArenaScheduler $scheduler */
     public $scheduler;
-	/** @var \annihilation\lib\formapi\FormAPI $formapi */
-	public $formapi;
-	/** @var \annihilation\lib\scordboard\Scoreboard $scoreboard */
-	public $scoreboard;
+    /** @var \annihilation\lib\formapi\FormAPI $formapi */
+    public $formapi;
+    /** @var \annihilation\lib\scordboard\Scoreboard $scoreboard */
+    public $scoreboard;
    /** @var \annihilation\utils\Utils $utils */
     public $utils = null;
     /** @var LangManager $lang */
@@ -115,6 +117,7 @@ class RandomArenaChooser {
 		$this->formapi = $plugin->formapi;
 		$this->lang = $plugin->getLang();
 		$this->utils = $plugin->getUtils();
+		$this->gserver = $plugin->getServer();
 	}
 	
 	public function getKit($player) : bool{
@@ -136,7 +139,7 @@ class RandomArenaChooser {
 	}
 		
 	public function getPlayer(string $name){
-		if($player = $this->plugin->getServer()->getPlayer($name) == null) $player = $this->plugin->getServer()->getPlayerExact($name);
+		if($player = $this->gserver->getPlayer($name) == null) $player = $this->gserver->getPlayerExact($name);
 		return $this->inGame($player) ? $player : null;
 	}
 	
@@ -167,7 +170,7 @@ class RandomArenaChooser {
 			if($player != null) $player = $this->getPlayer($player);
 			return false;
 		}
-		if(!isset($this->points[$player->getName()])) $this->points[$player->getName()] = ["kill" => 0, "win" => 0, "join" => 0, "death" => 0];
+		if(!isset($this->points[$player->getName()])) $this->points[$player->getName()] = self::BASIC_DATA_PLAYER;
 		$points = $this->points[$player->getName()];
 		switch($pointType){
 			case self::KILL_POINT:
