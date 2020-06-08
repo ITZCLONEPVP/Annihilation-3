@@ -27,16 +27,16 @@ class LangManager{
 		$this->utils = $plugin->getUtils();
 	}
 	
-	public function getLanguageFilePath($id){
+	public function getLanguageFilePath(int $id){
 		return $this->plugin->getLangPath() . "";
 	};
 	
-	public function getValue($key, $lang_id = 0){
+	public function getValue($key, int $lang_id = 0){
 		$this->utils->get($key, $lang_id);
 		return;
 	}
 	
-	public function isLanguageId($id) : bool{
+	public function isLanguageId(int $id) : bool{
 		return in_array($id, self::LANGUAGE_IDS) ? true : false;
 	}
 	
