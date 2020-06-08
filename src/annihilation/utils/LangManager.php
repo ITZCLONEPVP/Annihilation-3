@@ -16,10 +16,10 @@ use annihilation\Annihilation;
 class LangManager{
 	public $plugin;
 	public $utils;
+	public $default = "en";
 	const LANGUAGE_IDS = [
-		"default" => 0,
-		"en" => 1,
-		"vi" => 2,
+		"en" => 0,
+		"vi" => 1,
 	];
 	
 	public function __construct(Annihilation $plugin, $language_id){
@@ -27,26 +27,28 @@ class LangManager{
 		$this->utils = $plugin->getUtils();
 	}
 	
-	public function getLanguageFilePath(int $id){
-		return $this->plugin->getLangPath() . "";
+	/*public function getLanguageFilePath($id){
+		if(is_numeric($id)){
+		
+		return $this->plugin->getLangPath() . ;
 	};
 	
-	public function getValue($key, int $lang_id = 0){
+	public function getValue($key, $lang_id = 0){
 		$this->utils->get($key, $lang_id);
 		return;
 	}
 	
-	public function isLanguageId(int $id) : bool{
+	public function isLanguageId($id) : bool{
 		return in_array($id, self::LANGUAGE_IDS) ? true : false;
 	}
 	
-	/*public static function translateString(int $from, int $to, string $string){
+	public static function translateString(int $from, int $to, string $string){
 		//Todo
-	}*/
+	}
 	
 	public function transcript($from, $to, string $string) : string{
 		return Utils()::transcript($from, $to, string $string);
 	}
 	
-	public function 
+	public function */
 }

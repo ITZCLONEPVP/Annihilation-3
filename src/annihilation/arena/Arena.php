@@ -8,7 +8,7 @@ namespace annihilation\arena;
  *	  / ___ \| | | | | | | | | | | | | (_| | |_| | (_) | | | |
  *	 /_/   \_\_| |_|_| |_|_|_| |_|_|_|\__,_|\__|_|\___/|_| |_|                                                         
  * This plugin is free plugin for PocketMine or Foxel Server
- * @author NTT
+ * @authors Deaf team
  * @link http://github.com/NTT1906
  *
 */
@@ -28,12 +28,12 @@ use pocketmine\event\player\PlayerInteractEvent;
 use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\Item;
-use pocketmine\item\ItemIds;
 use pocketmine\level\Level;
 use pocketmine\level\Position;
 use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\LevelSoundEventPacket;
 use pocketmine\Player;
+use pocketmine\utils\Colour;
 use annihilation\Annihilation;
 use annihilation\utils\LangManager;
 use annihilation\kit\KitManager;
@@ -41,7 +41,7 @@ use annihilation\event\ArenaRestartEvent;
 use annihilation\math\Time;
 
 class RandomArenaChooser {
-	/** Arena Phase Id */
+	//Arena Phase Id
 	const PHASE_WAIT = 0;
 	const PHASE_GAME_1 = 1;
 	const PHASE_GAME_2 = 2;
@@ -49,14 +49,12 @@ class RandomArenaChooser {
 	const PHASE_GAME_4 = 4;
 	const PHASE_GAME_5 = 5;
 	const PHASE_RESTART = 6;
-	/** Point id */
+	// Point id
 	const KILL_POINT = 0;
 	const WIN_POINT = 1;
 	const JOIN_POINT = 2;
 	const DEATH_POINT = 3;
-	/** Basic data for players */
-	private const BASIC_DATA_PLAYER = ["kill" => 0, "win" => 0, "join" => 0, "death" => 0];
-	/** Team colour ids*/
+	//Team colour ids
 	private const TEAM_BASE_DATA = [
 		"red" => [
 			"name" => "Red",
@@ -83,16 +81,16 @@ class RandomArenaChooser {
 			"armor-colour-decimal" => "16777045",
 		],
 	];
-    /** @var Annihilation $plugin */
-    public $plugin; 
-    /** @var Annihilation $gserver */
-    public $gserver;
+	
+	/** @var Annihilation $plugin */
+	public $plugin;
+	
     /** @var ArenaScheduler $scheduler */
     public $scheduler;
-    /** @var \annihilation\lib\formapi\FormAPI $formapi */
-    public $formapi;
-    /** @var \annihilation\lib\scordboard\Scoreboard $scoreboard */
-    public $scoreboard;
+	/** @var \annihilation\lib\formapi\FormAPI $formapi */
+	public $formapi;
+	/** @var \annihilation\lib\scordboard\Scoreboard $scoreboard */
+	public $scoreboard;
    /** @var \annihilation\utils\Utils $utils */
     public $utils = null;
     /** @var LangManager $lang */
@@ -118,7 +116,6 @@ class RandomArenaChooser {
 		$this->formapi = $plugin->formapi;
 		$this->lang = $plugin->getLang();
 		$this->utils = $plugin->getUtils();
-		$this->gserver = $plugin->getServer();
 	}
 	
 	public function getKit($player) : bool{
@@ -131,54 +128,54 @@ class RandomArenaChooser {
 		$array_map(array(self, "setLeatherAmrorCoulor"), $this->armor_inv->getContents());
 	}
 	
-	public function setLeatherAmrorCoulor($item, $team) : bool{		
-		$armors = [
-			Item::LEATHER_CAP,
-			Item::LEATHER_CHESTPLATE,
-			Item::LEATHER_LEGGINGS,
-			Item::LEATHER_BOOTS
-		];		
-		if(!in_array($item->getId(), $armors) && !in_array(strtolower($team))) return false;
-		$rgb = $this->utils->dec2Rgb(self::TEAM_BASE_DATA[strtolower($team)]["armor-colour-decimal"]);
-		$colour = new Colour($rgb[0], $rgb[1], $rgb[2]);
-		$item->setCustomColor($colour);
-		return true;
+	public function setLeatherAmrorCoulor($item, $team) : bool{
+		$available_item = [Item::LEATHER_CAP, Item::LEATHER_CHESTPLATE, Item::LEATHER_LEGGINGS, Item::LEATHER_BOOTS];
+		if(in_array($item->getId(), $available_item) && in_array(strtolower($team), self::TEAM_BASE_DATA)){
+			$rgb = $this->utils->dec2Rgb(self::TEAM_BASE_DATA[strtolower($team)]["armor-colour-decimal"]);
+			$colour = new Colour($rgb[0], $rgb[1], $rgb[2]);
+			$item->setCustomColor($colour);
+			return true;
+		}
+		return false;
 	}
-		
-	public function getPlayer(string $name){
-		$player = $this->gserver->getPlayer($name);
-		if($player == null) $player = $this->gserver->getPlayerExact($name);
+	/**
+ 	* function getPlayer.
+ 	* @param string|Player $player
+ 	* @return bool
+	*/
+	public function getPlayer($player){
+		if(!$player instanceof Player){
+			$name = $player;
+			if($player = $this->plugin->getServer()->getPlayer($name) == null) $player = $this->plugin->getServer()->getPlayerExact($name);
+		}
 		return $this->inGame($player) ? $player : null;
 	}
-	
+	/**
+ 	* function getPlayers.
+ 	* @return array[] $results;
+	*/
 	public function getPlayers(){
 		$results = array();
 		foreach($this->players as $name => $data){
 			$results[$name] = $this->getPlayer($name);
 		}
 		return $results;
-		//return array_map(array(self, "getPlayer"), $this->players...
+		/*return array_map(array(self, "getPlayer"), $this->players...*/
 	}
-	
+	/**
+	 * function inGame.
+	 * @param string|Player $player
+	 * @return bool
+	*/
 	public function inGame($player) : bool{
-		if(!$player instanceof Player){
-			$player = $this->getPlayer($player);
-			if($player != null) $player = $this->getPlayer($player);
-			return false;
-		}
-		if($player->getLevel()->getName() != $this->data->level){
+		if($player->getLevel()->getName() == $this->data->level){
 			if(isset($this->players[$player->getName()])) return true;
 		}
 		return false;
 	}
 	
 	public function addPoint($player, int $pointType) : bool{
-		if(!$player instanceof Player){
-			$player = $this->getPlayer($player);
-			if($player != null) $player = $this->getPlayer($player);
-			return false;
-		}
-		if(!isset($this->points[$player->getName()])) $this->points[$player->getName()] = self::BASIC_DATA_PLAYER;
+		if(!isset($this->points[$player->getName()])) $this->points[$player->getName()] = ["kill" => 0, "win" => 0, "join" => 0, "death" => 0];
 		$points = $this->points[$player->getName()];
 		switch($pointType){
 			case self::KILL_POINT:

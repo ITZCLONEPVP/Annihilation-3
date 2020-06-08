@@ -8,7 +8,7 @@ namespace annihilation;
  *	  / ___ \| | | | | | | | | | | | | (_| | |_| | (_) | | | |
  *	 /_/   \_\_| |_|_| |_|_|_| |_|_|_|\__,_|\__|_|\___/|_| |_|                                                         
  * This plugin is free plugin for PocketMine or Foxel Server
- * @author NTT
+ * @author Deaf team
  * @link http://github.com/NTT1906
  *
 */
@@ -42,7 +42,6 @@ class Annihilation{
 	];
 	/** @var array BASE_DATA */
 	private const BASE_DATA=[
-		"
 		"waiting-level" => "",
 		"leaderboard" => [
 			"win-position" => "",
