@@ -25,7 +25,44 @@ use annihilation\utils\Utils;
 class Annihilation{
 	/** @var Annihilation $instance */
 	private static $instance;
-	
+	private const CUSTOMIZE = [
+		"config" => "0.0.1",
+		"defauft" => [
+			"lang" => "en",
+			"lobby" => "world",
+			"waiting-lobby" => "world"
+		"form" => [
+			"kit-ui" => [
+				"title" => "Annihilation ➣ KitUi",
+				"content" => "Select your kit",
+				"button-format" => "",
+				"enough-money" => "",
+				"enough-money-format" => "",
+				"no-enough-money" => "",
+				"no-enough-money-format" => "",
+			],
+			"shop-ui" => [ 
+				"title" => "Annihilation ➣ Shop",
+				"content" => "",
+				"button-format" => "",
+				"enough-money" => "",
+				"enough-money-format" => "",
+				"no-enough-money" => "",
+				"no-enough-money-format" => "",
+			],
+			"upgrade-nexus-ui" => [
+				"title" => "Annihilation ➣ Nexus",
+				"content" => "",
+				"button-format" => "",
+				"enough-money" => "",
+				"enough-money-format" => "",
+				"no-enough-money" => "",
+				"no-enough-money-format" => "",
+			],
+		],
+	];
+	private const SYSTEM = [
+	];
 	/** @var array BASE_LANGUAGE */
 	private const BASE_LANGUAGE = [
 		"config" => "1.0.0",
@@ -39,9 +76,10 @@ class Annihilation{
 		"arena-missing-player" => "You need more player to start the game! ({here}/{max})",
 		"arena-full-player-message" => "Arena is full",
 		"arena-team-full" => "{team} team is full!",
-	];
+
 	/** @var array BASE_DATA */
 	private const BASE_DATA=[
+		"lobby" = "default",
 		"waiting-level" => "",
 		"leaderboard" => [
 			"win-position" => "",
@@ -75,19 +113,6 @@ class Annihilation{
 			"arena-sign-map" => "Map: {level}",
 			"arena-sign-stat" => "[{now}/{max}]"
 		],
-		"kits" => [
-			"custom" => false,
-			"kits-title" => "Annihilation Kits",
-			"kits-subtitle" => "Tap the button!",
-			"kits-possible" => "{green}{desc}",
-			"kits-impossible" => "{gray}{desc}",
-			"kits-name" => "{name}",
-			"kits-money" => "{value}$",
-			"kits-button" => "{kit-name} -=- {money}",
-			"kits-button-subline" => "{kit-contents}",
-			"#You can remove {prefix} for no prefix",
-			"kits-message-not-enough" => "{prefix} You need more",
-		],
 		"point" => [
 			"kill" => 0,
 			"join" => 0,
@@ -101,6 +126,22 @@ class Annihilation{
 			"join-impossible" => "{gray}{desc}",
 			"join-button" => "{arena-name} -=- {now}/{max}",
 			"join-button-subline" => "{arena-status}",
+		],
+	];
+
+	private const CUSTOMIZE = [ 
+		"kits" => [
+			"custom" => false,
+			"kits-title" => "Annihilation Kits",
+			"kits-subtitle" => "Tap the button!",
+			"kits-possible" => "{green}{desc}",
+			"kits-impossible" => "{gray}{desc}",
+			"kits-name" => "{name}",
+			"kits-money" => "{value}$",
+			"kits-button" => "{kit-name} -=- {money}",
+			"kits-button-subline" => "{kit-contents}",
+			"#You can remove {prefix} for no prefix",
+			"kits-message-not-enough" => "{prefix} You need more",
 		],
 	];
 	
@@ -118,12 +159,6 @@ class Annihilation{
 		"plugin-message-bug" => "If you found anybug, makes an issue on {link}",
 		"plugin-log-error" => "There were an error! Please try again!",
 	];
-	/** @var array $backup_links */
-	private $backup_links = [
-		"base-game-language" => "",
-		"base-data" => "",
-		"system-lang" => ""
-	];
 	/** @var array $data */
 	private $data;
 	/** @var string $plugin_path */
@@ -140,20 +175,31 @@ class Annihilation{
 	/** @var Arena[] $arenas */
 	private $arenas = [];
 	
-	private $depends = [];
+	private $depends = [
+		"RedstoneCircuit" => " https://github.com/tedo0627/RedstoneCircuit_PMMP-Plugin/releases/download/1.0.1/RedstoneCircuit_v1.0.1.phar",
+		"FormAPI" => "library",
+		"EconomyAPI" => "poggit",
+	];
+	
+	public function onLoad(){
+		 self::$instance = $this;
+	}
 	
 	public function onEnable(){
-		self::$instance = $this;
-		$this->depends = ["RedstoneCircuit", "FormAPI", "EconomyAPI"];
-		$this->setUp();
-		//https://github.com/tedo0627/RedstoneCircuit_PMMP-Plugin/releases/download/1.0.1/RedstoneCircuit_v1.0.1.phar
-		//Redstone stuff
+		$this->plugin_path = $this->get
+		$this->utils = new Utils($this);
+		
+		$this->data = $this->utils->toArray($this->plugin_path . "data.yml");
+		$this->initDataFiles();
+		$this->loadArenas();
 	}
+
+	
 	
 	// -=-
 	
 	public static function getInstance(){
-		return self::$instance != null ? self::$instance : $this;
+		return self::$instance;
 	}
 	
 	public function getUtils(){

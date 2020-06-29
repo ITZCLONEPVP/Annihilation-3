@@ -40,7 +40,7 @@ use annihilation\kit\KitManager;
 use annihilation\event\ArenaRestartEvent;
 use annihilation\math\Time;
 
-class RandomArenaChooser {
+class RandomArenaChooser{
 	//Arena Phase Id
 	const PHASE_WAIT = 0;
 	const PHASE_GAME_1 = 1;
@@ -49,11 +49,11 @@ class RandomArenaChooser {
 	const PHASE_GAME_4 = 4;
 	const PHASE_GAME_5 = 5;
 	const PHASE_RESTART = 6;
-	// Point id
-	const KILL_POINT = 0;
-	const WIN_POINT = 1;
-	const JOIN_POINT = 2;
-	const DEATH_POINT = 3;
+	//Data
+	public $arena;
+	private $data = []:
+	private $players = [];
+	
 	//Team colour ids
 	private const TEAM_BASE_DATA = [
 		"red" => [
@@ -95,28 +95,38 @@ class RandomArenaChooser {
     public $utils = null;
     /** @var LangManager $lang */
     public $lang;
-    /** @var array[] $player */
-    public $players = array(); 
-    /** @var array[] $data */
-    public $data = array();    
-    /** @var array[] $kits */
-    public $kits = array();
     /** @var array[] $phase */
     public $phase = 0;
-    /** @var array[] $points */
-    public $points = array();
+
+	public $level;
+	public $wait_level;
 	/**
  	* Arena constructor.
  	* @param Annihilation $plugin
  	* @param array $data
 	 */
-	public function __construct(Annihilation $plugin, array $data){
+	public function __construct(Annihilation $plugin, array $arena){
 		$this->plugin = $plugin;
-		$this->data = $data;
+		$this->arena = $arena;
 		$this->formapi = $plugin->formapi;
 		$this->lang = $plugin->getLang();
 		$this->utils = $plugin->getUtils();
 	}
+
+	public function joinArena(Player $player){
+		
+	}
+
+	public function leftArena(Player $player){
+	}
+
+	public function startGame(Player $player){
+	}
+
+	public function restartArena(Player $player){
+	}
+
+	public function 
 	
 	public function getKit($player) : bool{
 		if(!$player instanceof Player){
@@ -125,10 +135,10 @@ class RandomArenaChooser {
 			return false;
 		}
 		$armor_inv = $player->getArmorInventory();
-		$array_map(array(self, "setLeatherAmrorCoulor"), $this->armor_inv->getContents());
+		array_map(array(self, "setLeatherAmrorCoulor"), $this->armor_inv->getContents());
 	}
-	
-	public function setLeatherAmrorCoulor($item, $team) : bool{
+
+	public function setLeatherAmrorColour($item, $team) : bool{
 		$available_item = [Item::LEATHER_CAP, Item::LEATHER_CHESTPLATE, Item::LEATHER_LEGGINGS, Item::LEATHER_BOOTS];
 		if(in_array($item->getId(), $available_item) && in_array(strtolower($team), self::TEAM_BASE_DATA)){
 			$rgb = $this->utils->dec2Rgb(self::TEAM_BASE_DATA[strtolower($team)]["armor-colour-decimal"]);
