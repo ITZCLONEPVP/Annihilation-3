@@ -13,7 +13,7 @@
 	</div>
 </div>
 
-- Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[PhantomI](https://github.com/CV98/Phantom)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software<br>
+- Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Phantom](https://github.com/CV98/Phantom)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software<br>
 - Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
 
 <div align="center">
@@ -43,10 +43,10 @@ Note: If you don't do this, this plugin will be disabled
 
 | Setup Command | Description |
 | --- | --- |
-| **/anni help** | **Displays list of help**<br><br>![](https://i.ibb.co/p2jnYmM/obrazek.png) |
+| **/anni help** | **Displays list of help**<br><br>![] |
 | **/anni create** | **Creates a new arena** |
-| **/anni arenas** | **Displays list of arenas**<br><br>![](https://i.ibb.co/QPPsz37/obrazek.png) |
-| **/anni remove** | **Removes an arena**<br><br>- Requires an id from /ah list |
+| **/anni arenas** | **Displays list of arenas**<br><br>![] |
+| **/anni remove** | **Removes an arena**<br>
 | **/anni manage ** | **Manage The configuration** 
 
 | Game Command | Description |
@@ -71,5 +71,5 @@ MinigameAPI(https://github.com/ITZCLONEPVP/MinigameAPI)
 <div align="center">
 	<h2>Donation</h2>
 </div>
-
+- Want more activity from me donate to me discord i take anything DISCORD : CV98#8714
 - If you want to donate money to us then contact [MFDGaming](https://github.com/MFDGaming), he deserves the money.
