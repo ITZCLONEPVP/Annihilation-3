@@ -13,7 +13,7 @@
 	</div>
 </div>
 
-- Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[Steadfast3][PhantomI](https://github.com/CV98/Phantom)(https://github.com/MFDGaming/Steadfast3) server software<br>
+- Annihilation Minigame for [Foxel](https://github.com/BedrockPlay/Foxel)/[Pmmp](https://github.com/pmmp/PocketMine-MP)/[PhantomI](https://github.com/CV98/Phantom)/[Steadfast3](https://github.com/MFDGaming/Steadfast3) server software<br>
 - Annihilation is a gamemode about survival where you need to protect your nexus or go out and attack others, the team with the last nexus alive is the winner.
 
 <div align="center">
@@ -69,7 +69,6 @@ EconomyAPI(https://poggit.pmmp.io/plugins/poggit-orphanage/EconomyAPI)
 MinigameAPI(https://github.com/ITZCLONEPVP/MinigameAPI)
 
 <div align="center">
-div align="center">
 	<h2>Donation</h2>
 </div>
 
